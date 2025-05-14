@@ -11,17 +11,17 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 const authRouter = Router();
 
-authRouter.post('signup', async (req, res) => {
+authRouter.post('/signup', async (req, res) => {
   const {email, password} = req.body;
   const hashed = await bcrypt.hash(password, 10);
   await User.create({email, password: hashed});
   res.send({message: "User regisdtered successfully"});
 });
 
-authRouter.post('login', async (req, res) => {
+authRouter.post('/login', async (req, res) => {
   const {email, password} = req.body;
   const user  = await User.findOne({email});
-  if (!user || !(await bcrypt.compare(password, user.password))) {
+  if (!user || !(bcrypt.compare(password, user.password))) {
     return res.status(401).send({message: "Invalid credentials"});
   }
 
