@@ -1,7 +1,10 @@
 import mongoose, { Schema, model } from "mongoose";
 
 const ToDoSchema = new mongoose.Schema({
-  userId: mongoose.Schema.Types.ObjectId,
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  },
   task: String
 })
 

@@ -13,6 +13,10 @@ const authRouter = Router();
 
 authRouter.post('/signup', async (req, res) => {
   const {email, password, userName} = req.body;
+  const user = await User.findOne({ email });
+  if (user) {
+    return res.status(400).send({message: "User already exists"});
+  }
   const hashed = await bcrypt.hash(password, 10);
   await User.create({email, password: hashed, userName});
   res.send({message: "User regisdtered successfully"});
