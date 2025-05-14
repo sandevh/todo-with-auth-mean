@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import User from '../models/User.js';
 
-const JWT_SECRET = '123meantodo321';
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const authRouter = Router();
 
