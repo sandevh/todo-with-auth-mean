@@ -12,9 +12,9 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const authRouter = Router();
 
 authRouter.post('/signup', async (req, res) => {
-  const {email, password} = req.body;
+  const {email, password, userName} = req.body;
   const hashed = await bcrypt.hash(password, 10);
-  await User.create({email, password: hashed});
+  await User.create({email, password: hashed, userName});
   res.send({message: "User regisdtered successfully"});
 });
 
