@@ -6,16 +6,16 @@ import User from '../models/User.js';
 
 const JWT_SECRET = '123meantodo321';
 
-const router = Router();
+const authRouter = Router();
 
-router.post('signup', async (req, res) => {
+authRouter.post('signup', async (req, res) => {
   const {email, password} = req.body;
   const hashed = await bcrypt.hash(password, 10);
   await User.create({email, password: hashed});
   res.send({message: "User regisdtered successfully"});
 });
 
-router.post('login', async (req, res) => {
+authRouter.post('login', async (req, res) => {
   const {email, password} = req.body;
   const user  = await User.findOne({email});
   if (!user || !(await bcrypt.compare(password, user.password))) {
@@ -26,4 +26,4 @@ router.post('login', async (req, res) => {
   res.send({token});
 });  
 
-export default router;
+export default authRouter;
