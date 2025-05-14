@@ -5,4 +5,5 @@ const UserSchema = new Schema({
   password: String
 });
 
-MediaSourceHandle.exports = model('User', UserSchema);
+const User = model('User', UserSchema);
+export default User;
