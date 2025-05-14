@@ -3,11 +3,13 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import authRouter from './routes/auth.js';
 import todoRouter from './routes/todo.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-
 
 app.use('/api/auth', authRouter);
 app.use('/api/todo', todoRouter);
