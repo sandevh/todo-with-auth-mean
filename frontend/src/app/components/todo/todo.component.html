@@ -19,7 +19,10 @@
 
   <ul>
     <li *ngFor="let todo of todos" (click)="onClickTodo(todo)">
-      <span class="status-icon">{{ todo.done ? '✅' : '⭕️' }}</span>
+      <span class="status-icon" [title]="todo.done ? 'Completed' : 'Pending'">
+        <i *ngIf="todo.done" class="fas fa-check-circle text-success"></i>
+        <i *ngIf="!todo.done" class="fas fa-circle text-secondary"></i>
+      </span>
       <span [class.done]="todo.done">{{ todo.task }}</span>
       <button
         (click)="onDeleteTodo(todo._id); $event.stopPropagation()"

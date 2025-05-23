@@ -26,8 +26,8 @@ export class TodoService {
     });
   }
 
-  addTodo(todo: string) {
-    return this.http.post(`${this.baseUrl}`, { todo }, this.getHeaders());
+  addTodo(task: string) {
+    return this.http.post(`${this.baseUrl}`, { task }, this.getHeaders());
   }
 
   updateTodo(id: string, data: Partial<Todo>) {

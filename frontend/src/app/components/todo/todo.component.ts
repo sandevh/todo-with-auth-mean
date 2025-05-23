@@ -52,7 +52,7 @@ export class TodoComponent implements OnInit {
       });
     } else {
       this.errorRef.nativeElement.textContent =
-        'Task and Date cannot be empty!';
+        'Task cannot be empty!';
     }
   }
 
