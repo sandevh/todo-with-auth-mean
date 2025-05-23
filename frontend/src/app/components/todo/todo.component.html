@@ -1,1 +1,32 @@
-<p>todo works!</p>
+<div class="logout-container">
+  <h2 style="margin-right: 100px;" class="userName">Welcome, {{ userName }}</h2>
+  <button class="logout-button" (click)="onLogout()">Logout</button>
+</div>
+
+<div class="todo-container">
+  <h2>To-Do List</h2>
+  <p #errorRef class="error-text" id="login-error"></p>
+  <form (submit)="onAddTodo()">
+    <input
+    [(ngModel)]="newTask"
+    name="task"
+    placeholder="Enter a new task"
+    required
+    (input)="clearError()"
+    />
+    <button type="submit" class="bg-amber-400">Add Task</button>
+  </form>
+
+  <ul>
+    <li *ngFor="let todo of todos" (click)="onClickTodo(todo)">
+      <span class="status-icon">{{ todo.done ? '✅' : '⭕️' }}</span>
+      <span [class.done]="todo.done">{{ todo.task }}</span>
+      <button
+        (click)="onDeleteTodo(todo._id); $event.stopPropagation()"
+        class="delete-button"
+      >
+        Delete
+      </button>
+    </li>
+  </ul>
+</div>

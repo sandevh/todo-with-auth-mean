@@ -18,6 +18,22 @@ toDoRouter.post("/", auth, async (req, res) => {
   res.send(todo);
 });
 
+toDoRouter.put("/:id", auth, async (req, res) => {
+  const {done} = req.body;
+
+  const updated = await ToDo.findOneAndUpdate(
+    { _id: req.params.id, userId: req.user.userId },
+    { done },
+    { new: true }
+  );
+
+  if (!updated) {
+    return res.status(404).send({message: "ToDo not found"});
+  }
+
+  res.send(updated);
+});
+
 toDoRouter.delete("/:id", auth, async (req, res) => {
   await ToDo.deleteOne({ _id: req.params.id, userId: req.user.userId });
   res.status(204).send();

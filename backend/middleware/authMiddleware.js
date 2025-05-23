@@ -11,7 +11,7 @@ const authMiddleware = (req, res, next) => {
   if (!authHeader) {
     return res.status(401).json({ message: "Authorization header missing" });
   }
-  const token = authHeader.split(" ")[0]; 
+  const token = authHeader.split(" ")[1]; 
 
   if (!token) {
     return res.status(401).json({ message: "Token missing" });
@@ -22,6 +22,7 @@ const authMiddleware = (req, res, next) => {
     req.user = decoded;
     next(); 
   } catch (error) {
+    console.error("Token verification error:", error);
     return res.status(401).json({ message: "Invalid token" });
   }
 };
